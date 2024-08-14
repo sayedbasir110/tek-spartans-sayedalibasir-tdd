@@ -3,11 +3,16 @@ package tek.tdd.base;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import tek.tdd.browsers.BaseBrowser;
+import tek.tdd.browsers.ChromeBrowser;
+import tek.tdd.browsers.EdgeBrowser;
+import tek.tdd.browsers.FirefoxBrowser;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.Duration;
 import java.util.Properties;
 
 /**
@@ -36,6 +41,34 @@ public abstract class BaseSetup {
         }
     }
     public void setupBrowser(){
+        String browserType = properties.getProperty("ui.browser");
+        boolean isHeadless = Boolean.parseBoolean(properties.getProperty("ui.browser.headless"));
+        LOGGER.info("Running on Browser: {} and isHeadless: {}",browserType,isHeadless);
+        BaseBrowser browser;
+        switch (browserType.toLowerCase()){
+            case "chrome":
+                browser = new ChromeBrowser();
+                break;
+            case "edge":
+                browser = new EdgeBrowser();
+                break;
+            case "firefox":
+                browser = new FirefoxBrowser();
+                break;
+            default:
+                throw new RuntimeException("Wrong browser type, choose between chrome, firefox or edge");
+        }
+        driver = browser.openBrowser(isHeadless);
 
+        String url = properties.getProperty("ui.url");
+        driver.get(url);
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(WAIT_TIME_IN_SECONDS));
+    }
+    public void closeBrowser(){
+        if (driver!=null) driver.quit();
+    }
+    public WebDriver getDriver(){
+        return driver;
     }
 }

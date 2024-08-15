@@ -1,5 +1,7 @@
 package tek.tdd.utility;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -12,34 +14,42 @@ import java.time.Duration;
 import java.util.List;
 
 public class SeleniumUtility extends BaseSetup {
-    private WebDriverWait getWait() {
-        return  new WebDriverWait(getDriver(), Duration.ofSeconds(20));
+    private static final Logger LOGGER = LogManager.getLogger(SeleniumUtility.class);
+    private WebDriverWait getWait()  {
+        return new WebDriverWait(getDriver(), Duration.ofSeconds(WAIT_TIME_IN_SECONDS));
     }
-    private WebElement waitForVisibility (By locator){
-        return getWait().until(ExpectedConditions.visibilityOfElementLocated(locator));
+
+    public String getElementText(By locator) {
+        LOGGER.debug("Returning element Text {}" , locator);
+        return getWait().until(ExpectedConditions.visibilityOfElementLocated(locator))
+                .getText();
     }
-    public void clickOnElement (By locator){
-        getWait().until(ExpectedConditions.elementToBeClickable(locator)).click();
+    public WebElement waitForVisibility(WebElement element){
+        return getWait().until(ExpectedConditions.visibilityOf(element));
     }
-    public void sendKeysToElement (By locator, String value) {
-        WebElement element = waitForVisibility(locator);
-        element.clear();
-        element.sendKeys(value);
+
+    public String getElementText(WebElement element) {
+        LOGGER.debug("Returning element Text {}" , element);
+        return waitForVisibility(element).getText();
     }
-    public String getElementText (By locator){
-        return waitForVisibility(locator).getText();
+
+    public boolean isElementEnabled(WebElement element) {
+        LOGGER.debug("Checking element enable status {}", element);
+        boolean isEnabled = waitForVisibility(element).isEnabled();
+        LOGGER.debug("element is enabled status {}", isEnabled);
+        return isEnabled;
     }
-    public boolean  isElementEnabled(By locator){
-        return waitForVisibility(locator).isEnabled();
+    public void clickOnElement(WebElement element){
+        LOGGER.debug("Clicking on element {}", element);
+        getWait().until(ExpectedConditions.elementToBeClickable(element)).click();
     }
-    public boolean isElementDisplayed(By locator) {
-        return waitForVisibility(locator).isDisplayed();
+    public void sendTextToElement (WebElement element, String text){
+        LOGGER.info("Sending {} to {}",text,element);
+        WebElement element1 = waitForVisibility(element);
+        element1.sendKeys(text);
     }
-    public List<WebElement> getElements(By locator) {
-        return getWait().until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
-    }
-    public byte[] takeScreenShot () {
-        TakesScreenshot screenshot = (TakesScreenshot) getDriver();
-        return screenshot.getScreenshotAs(OutputType.BYTES);
+    public boolean isElementDisplayed(WebElement element){
+        LOGGER.info("Checking if {} is displayed",element);
+        return waitForVisibility(element).isDisplayed();
     }
 }

@@ -9,6 +9,9 @@ public class AccountPage extends SeleniumUtility {
     public AccountPage(){
         PageFactory.initElements(getDriver(),this);
     }
-    @FindBy(className = "account__information-email")
-    public WebElement accountEmail;
+    @FindBy(className = "account__information-email") public WebElement accountEmail;
+
+    public String getAccountEmail(){
+        return getElementText(accountEmail);
+    }
 }

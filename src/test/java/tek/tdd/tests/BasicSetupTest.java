@@ -2,9 +2,11 @@ package tek.tdd.tests;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import tek.tdd.base.UIBaseClass;
 import tek.tdd.pages.HomePage;
+import tek.tdd.pages.SignInPage;
 
 public class BasicSetupTest extends UIBaseClass {
     private void validateLogo() {
@@ -23,13 +25,5 @@ public class BasicSetupTest extends UIBaseClass {
         boolean isEnabled = isElementEnabled(homePage.signInLink);
         Assert.assertTrue(isEnabled, "Sign in button should be enabled");
     }
-    @Test
-    public void validateSuccessfulLogin() {
-        clickOnElement(homePage.signInLink);
-        sendTextToElement(signInPage.emailInput, "john.doe@gmail.com");
-        sendTextToElement(signInPage.passwordInput, "John@123");
-        clickOnElement(signInPage.loginBtn);
-        boolean isDisplayed = isElementDisplayed(homePage.accountLink);
-        Assert.assertTrue(isDisplayed);
-    }
+
 }

@@ -14,4 +14,5 @@ public class AccountPage extends SeleniumUtility {
     public String getAccountEmail(){
         return getElementText(accountEmail);
     }
+
 }

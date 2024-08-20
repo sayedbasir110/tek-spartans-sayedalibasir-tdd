@@ -14,6 +14,7 @@ public class SignUpPage extends SeleniumUtility {
     @FindBy(id="passwordInput") public WebElement passwordInput;
     @FindBy(id="confirmPasswordInput") public WebElement confirmPasswordInput;
     @FindBy(id="signupBtn") public WebElement signUpBtn;
+    @FindBy(xpath = "//div[contains(text(),'this email')]") public WebElement existingEmailError;
 
     public void fillNewAccountInfo(String name, String email, String password, String confirmPassword) {
         sendTextToElement(nameInput, name);
@@ -23,5 +24,8 @@ public class SignUpPage extends SeleniumUtility {
     }
     public void clickOnSignUp(){
         clickOnElement(signUpBtn);
+    }
+    public String getExistingEmailError(){
+        return getElementText(existingEmailError);
     }
 }

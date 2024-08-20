@@ -52,4 +52,7 @@ public class SeleniumUtility extends BaseSetup {
         LOGGER.info("Checking if {} is displayed",element);
         return waitForVisibility(element).isDisplayed();
     }
+    public List<WebElement> getElements(List<WebElement> elements){
+        return getWait().until(ExpectedConditions.visibilityOfAllElements(elements));
+    }
 }

@@ -5,6 +5,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import tek.tdd.utility.SeleniumUtility;
 
+import java.util.List;
+
 public class SignUpPage extends SeleniumUtility {
     public SignUpPage(){
         PageFactory.initElements(getDriver(),this);
@@ -15,6 +17,7 @@ public class SignUpPage extends SeleniumUtility {
     @FindBy(id="confirmPasswordInput") public WebElement confirmPasswordInput;
     @FindBy(id="signupBtn") public WebElement signUpBtn;
     @FindBy(xpath = "//div[contains(text(),'this email')]") public WebElement existingEmailError;
+    @FindBy(className = "error") public List<WebElement> fieldErrorMessages;
 
     public void fillNewAccountInfo(String name, String email, String password, String confirmPassword) {
         sendTextToElement(nameInput, name);

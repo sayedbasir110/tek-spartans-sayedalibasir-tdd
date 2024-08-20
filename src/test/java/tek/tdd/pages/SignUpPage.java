@@ -15,16 +15,10 @@ public class SignUpPage extends SeleniumUtility {
     @FindBy(id="confirmPasswordInput") public WebElement confirmPasswordInput;
     @FindBy(id="signupBtn") public WebElement signUpBtn;
 
-    public void enterName(String name){
+    public void fillNewAccountInfo(String name, String email, String password, String confirmPassword) {
         sendTextToElement(nameInput, name);
-    }
-    public void enterEmail(String email){
-        sendTextToElement(emailInput,email);
-    }
-    public void enterPassword(String password){
+        sendTextToElement(emailInput, email);
         sendTextToElement(passwordInput, password);
-    }
-    public void enterConfirmPassword(String confirmPassword){
         sendTextToElement(confirmPasswordInput, confirmPassword);
     }
     public void clickOnSignUp(){

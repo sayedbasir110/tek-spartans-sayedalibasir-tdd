@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="running test classes">
+    <test name="Running Security test">
+        <classes>
+            <class name="tek.tdd.tests.SecurityTest"> </class>
+        </classes>
+    </test>
+</suite>

@@ -7,7 +7,7 @@ import tek.tdd.utility.RandomEmailGenerator;
 
 public class CreateAccountTest extends UIBaseClass {
     @Test
-    public void createValidAccount(){
+    public void createValidAccountSuccessfully(){
         homePage.clickOnSignIn();
         signInPage.clickOnCreateAccountBtn();
         String email = RandomEmailGenerator.generateRandomEmail();

@@ -24,4 +24,7 @@ public class SignInPage extends SeleniumUtility {
     public void clickOnCreateAccountBtn(){
         clickOnElement(createAccountBtn);
     }
+    public String getErrorText(){
+        return getElementText(errorMessage);
+    }
 }

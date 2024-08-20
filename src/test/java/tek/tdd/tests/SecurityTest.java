@@ -9,16 +9,16 @@ import tek.tdd.pages.SignInPage;
 public class SecurityTest extends UIBaseClass {
     @Test
     public void validateSuccessfulLogin() {
-        clickOnElement(homePage.signInLink);
+        homePage.clickOnSignIn();
         signInPage.doSignIn("john.doe@gmail.com", "John@123");
         boolean isDisplayed = isElementDisplayed(homePage.accountLink);
         Assert.assertTrue(isDisplayed);
     }
     @Test(dataProvider = "invalidTestData")
     public void loginWithInvalidUsername (String email, String password){
-        clickOnElement(homePage.signInLink);
+        homePage.clickOnSignIn();
         signInPage.doSignIn(email, password);
-        String actualErrorMessage = getElementText(signInPage.errorMessage);
+        String actualErrorMessage = signInPage.getErrorText();
         Assert.assertEquals(actualErrorMessage,"wrong username or password");
     }
     @DataProvider(name = "invalidTestData")

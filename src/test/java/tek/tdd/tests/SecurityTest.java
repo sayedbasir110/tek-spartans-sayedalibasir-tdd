@@ -15,7 +15,7 @@ public class SecurityTest extends UIBaseClass {
         Assert.assertTrue(isDisplayed);
     }
     @Test(dataProvider = "invalidTestData")
-    public void loginWithInvalidUsername (String email, String password){
+    public void loginWithInvalidUsernameAndPasswordAndValidateError (String email, String password){
         homePage.clickOnSignIn();
         signInPage.doSignIn(email, password);
         String actualErrorMessage = signInPage.getErrorText();

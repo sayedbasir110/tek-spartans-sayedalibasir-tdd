@@ -2,7 +2,7 @@
 <suite name="running test classes">
     <test name="Running Security test">
         <classes>
-            <class name="tek.tdd.tests.SecurityTest"> </class>
+            <class name="tek.tdd.tests.CreateAccountTest"> </class>
         </classes>
     </test>
 </suite>

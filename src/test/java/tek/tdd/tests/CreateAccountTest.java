@@ -19,7 +19,7 @@ public class CreateAccountTest extends UIBaseClass {
         Assert.assertEquals(actualAccountEmail, email, "Account email should match");
     }
     @Test
-    public void createAccountWithExcitingEmail(){
+    public void createAccountWithExcitingEmailAndValidateError(){
         homePage.clickOnSignIn();
         signInPage.clickOnCreateAccountBtn();
         signUpPage.fillNewAccountInfo("John", "johndoe@gmail.com","Password@123", "Password@123");
@@ -28,7 +28,7 @@ public class CreateAccountTest extends UIBaseClass {
         Assert.assertEquals(actualErrorMessage, "this email is already exist, please use another email address", "Error message should match");
     }
     @Test
-    public void createAccountWithoutFillingTheForm(){
+    public void createAccountWithoutFillingTheFormAndValidateErrors(){
         homePage.clickOnSignIn();
         signInPage.clickOnCreateAccountBtn();
         signUpPage.clickOnSignUp();
@@ -40,7 +40,7 @@ public class CreateAccountTest extends UIBaseClass {
                 "Confirm Password is a required field");
         Assert.assertEquals(errorElements.size(), expectedErrorMessages.size());
         for (int i=0; i<errorElements.size(); i++){
-            Assert.assertEquals(errorElements.get(i).getText(), expectedErrorMessages.get(i));
+            Assert.assertEquals(errorElements.get(i).getText(), expectedErrorMessages.get(i), "Error messages should match");
         }
 
     }

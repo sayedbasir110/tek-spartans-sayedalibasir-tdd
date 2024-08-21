@@ -2,13 +2,9 @@ package tek.tdd.tests;
 
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import tek.tdd.base.UIBaseClass;
 import tek.tdd.utility.RandomEmailGenerator;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CreateAccountTest extends UIBaseClass {
@@ -37,12 +33,12 @@ public class CreateAccountTest extends UIBaseClass {
         signInPage.clickOnCreateAccountBtn();
         signUpPage.clickOnSignUp();
         List<WebElement> errorElements = getElements(signUpPage.fieldErrorMessages);
-        List<String> expectedErrorMessages = Arrays.asList(
+        List<String> expectedErrorMessages = List.of(
                 "Name is a required field",
                 "Email is a required field",
                 "Password is a required field",
-                "Confirm Password is a required field"
-        );
+                "Confirm Password is a required field");
+        Assert.assertEquals(errorElements.size(), expectedErrorMessages.size());
         for (int i=0; i<errorElements.size(); i++){
             Assert.assertEquals(errorElements.get(i).getText(), expectedErrorMessages.get(i));
         }

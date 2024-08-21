@@ -29,7 +29,7 @@ public class SeleniumUtility extends BaseSetup {
     }
 
     public String getElementText(WebElement element) {
-        LOGGER.debug("Returning element Text {}" , element);
+        LOGGER.debug("Returning {} Text " , element);
         return waitForVisibility(element).getText();
     }
 
@@ -54,6 +54,7 @@ public class SeleniumUtility extends BaseSetup {
         return waitForVisibility(element).isDisplayed();
     }
     public List<WebElement> getElements(List<WebElement> elements){
+        LOGGER.info("Getting all WebElements {}", elements);
         return getWait().until(ExpectedConditions.visibilityOfAllElements(elements));
     }
 }

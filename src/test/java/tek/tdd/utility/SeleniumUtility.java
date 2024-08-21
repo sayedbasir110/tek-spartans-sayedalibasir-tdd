@@ -46,6 +46,7 @@ public class SeleniumUtility extends BaseSetup {
     public void sendTextToElement (WebElement element, String text){
         LOGGER.info("Sending {} to {}",text,element);
         WebElement element1 = waitForVisibility(element);
+        element1.clear();
         element1.sendKeys(text);
     }
     public boolean isElementDisplayed(WebElement element){

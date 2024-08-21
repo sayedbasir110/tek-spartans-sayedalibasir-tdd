@@ -18,5 +18,5 @@ public class HomePage extends SeleniumUtility {
     public void clickOnSignIn(){
         clickOnElement(signInLink);
     }
-
+    public void clickOnAccountLink(){ clickOnElement(accountLink);}
 }
